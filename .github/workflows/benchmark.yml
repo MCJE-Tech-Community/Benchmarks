@@ -1,0 +1,89 @@
+name: ベンチマーク
+
+run-name: ${{ inputs.function_benchmark }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: "Minecraft version"
+        required: false
+        default: "snapshot"
+      warmup_iterations:
+        type: number
+        description: "Number of warmup iterations"
+        required: false
+        default: 5
+      measurement_iterations:
+        type: number
+        description: "Number of measurement iterations"
+        required: false
+        default: 5
+      time:
+        type: number
+        description: "Duration of iterations in seconds"
+        required: false
+        default: 10
+      forks:
+        type: number
+        description: "Number of forks"
+        required: false
+        default: 5
+      time_unit:
+        type: choice
+        description: "Output time unit"
+        required: false
+        default: us
+        options: [ ns, us, ms, s, m ]
+      mc_args:
+        type: string
+        description: "Minecraft arguments to use with forks"
+        required: false
+        default: "nogui"
+      function_benchmark:
+        type: string
+        description: "Data pack name for function benchmark"
+        required: true
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v3
+      - name: Minecraftのセットアップ
+        id: minecraft
+        uses: mcenv/setup-minecraft@v3
+        with:
+          version: ${{ inputs.version }}
+      - name: Javaのセットアップ
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: ${{ fromJson(steps.minecraft.outputs.package).javaVersion.majorVersion }}
+      - name: ベンチマーク
+        run: |
+          echo "eula=true" > eula.txt
+
+          cat <<EOF > server.properties
+          level-name=worlds/${{ inputs.function_benchmark }}
+          level-type=flat
+          white-list=true
+          max-players=0
+          EOF
+
+          curl -L -o mch.jar https://github.com/mcenv/mch/releases/download/v0.15.0/mch.jar
+          java -jar mch.jar --mc=$MINECRAFT --warmup_iterations=${{ inputs.warmup_iterations }} --measurement_iterations=${{ inputs.measurement_iterations }} --time=${{ inputs.time }} --forks=${{ inputs.forks }} --time_unit=${{ inputs.time_unit }} --mc_args=${{ inputs.mc_args }} --function_benchmarks=${{ inputs.function_benchmark }}
+      - name: ベンチマーク結果のアップロード
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.minecraft.outputs.version }}
+          if-no-files-found: error
+          path: |
+            mch-results.json
+            mch-results.md
+      - name: サマリーの作成
+        uses: actions/github-script@v6
+        with:
+          script: require('./scripts/summary.js')({ context });
