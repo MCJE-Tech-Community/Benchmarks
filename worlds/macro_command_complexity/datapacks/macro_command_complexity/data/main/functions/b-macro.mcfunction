@@ -1,0 +1,1 @@
+$execute as @e[type=item_display,tag=A,scores={_=$(a)}] run _ "_"

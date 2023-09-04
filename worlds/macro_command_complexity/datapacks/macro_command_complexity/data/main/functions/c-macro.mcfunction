@@ -1,0 +1,1 @@
+$execute as @e[scores={_=$(a)}] at @s if entity @s run _ "_"
