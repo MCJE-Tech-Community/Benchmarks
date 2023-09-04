@@ -29,7 +29,7 @@ module.exports = (/** @type {{ context: { sha: string } }} */ { context }) => {
    *   }[],
    * }}
    */
-  const results = require('./mch-results.json');
+  const results = require('../mch-results.json');
 
   const lines = [
     '<h3>Results</h3>',
