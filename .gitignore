@@ -3,7 +3,7 @@
 /libraries/
 /logs/
 /versions/
-/worlds/*/
+/worlds/*/*/
 /worlds/*/datapacks/mch.zip
 !/worlds/*/datapacks/
 /banned-ips.json
