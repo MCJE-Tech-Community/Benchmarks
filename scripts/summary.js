@@ -47,8 +47,10 @@ module.exports = (/** @type {{ context: { sha: string } }} */ { context }) => {
     '</thead>',
   ];
 
-  for (let i = 0; i < results.results.length; i++) {
-    const { group, benchmark, mode, count, score, error, unit } = results.results[i];
+  const sortedResults = results.results.sort((a, b) => a.benchmark.localeCompare(b.benchmark));
+
+  for (let i = 0; i < sortedResults.length; i++) {
+    const { group, benchmark, mode, count, score, error, unit } = sortedResults[i];
     /** @type {string} */
     let benchmarkTag;
     if (i === 0) {
@@ -84,7 +86,7 @@ module.exports = (/** @type {{ context: { sha: string } }} */ { context }) => {
     'dateFormat X',
     `axisFormat %s`,
   );
-  for (const { benchmark, score, error } of results.results) {
+  for (const { benchmark, score, error } of sortedResults) {
     lines.push(
       `section ${benchmark.replace(':', '#58;')}`,
       `± ${error.toFixed(6)} : 0, ${Math.round(score)}`,
