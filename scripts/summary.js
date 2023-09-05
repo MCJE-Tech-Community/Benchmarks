@@ -49,11 +49,10 @@ module.exports = (/** @type {{ context: { sha: string } }} */ { context }) => {
 
   const sortedResults = results.results.sort((a, b) => a.benchmark.localeCompare(b.benchmark));
 
-  for (let i = 0; i < sortedResults.length; i++) {
-    const { group, benchmark, mode, count, score, error, unit } = sortedResults[i];
+  for (const { group, benchmark, mode, count, score, error, unit } of sortedResults) {
     /** @type {string} */
     let benchmarkTag;
-    if (i === 0) {
+    if (benchmark === 'mch:baseline') {
       benchmarkTag = `<details><summary><code>${benchmark}</code></summary><pre lang="mcfunction"><code></code></pre></details>`;
     } else {
       const [namespace, path] = benchmark.split(':');
