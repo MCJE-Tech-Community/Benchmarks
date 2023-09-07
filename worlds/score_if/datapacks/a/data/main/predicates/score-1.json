@@ -1,0 +1,31 @@
+[
+    {
+        "condition": "value_check",
+        "value": {
+            "type": "score",
+            "target": {
+                "type": "fixed",
+                "name": "A"
+            },
+            "score": "_"
+        },
+        "range": {
+            "min": {
+                "type": "score",
+                "target": {
+                    "type": "fixed",
+                    "name": "B"
+                },
+                "score": "_"
+            },
+            "max": {
+                "type": "score",
+                "target": {
+                    "type": "fixed",
+                    "name": "B"
+                },
+                "score": "_"
+            }
+        }
+    }
+]
