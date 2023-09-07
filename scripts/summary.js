@@ -35,7 +35,7 @@ module.exports = (/** @type {{ context: { sha: string }, timeUnit: TimeUnit }} *
   const fs = require('fs');
 
   /** @type {Results} */
-  const results = JSON.parse(fs.readFileSync('../mch-results.json').toString());
+  const results = JSON.parse(fs.readFileSync('./mch-results.json').toString());
 
   const lines = [
     '<h3>Results</h3>',
