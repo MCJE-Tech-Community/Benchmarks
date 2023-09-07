@@ -31,7 +31,7 @@
  * }} Results
  */
 
-module.exports = (/** @type {{ context: { sha: string }, timeUnit: TimeUnit }} */ { context }) => {
+module.exports = (/** @type {{ context: { sha: string }, world: string }} */ { context, world }) => {
   const fs = require('fs');
 
   /** @type {Results} */
@@ -60,7 +60,7 @@ module.exports = (/** @type {{ context: { sha: string }, timeUnit: TimeUnit }} *
       benchmarkTag = `<details><summary><code>${benchmark}</code></summary><pre lang="mcfunction"><code></code></pre></details>`;
     } else {
       const [namespace, path] = benchmark.split(':');
-      const file = `worlds/${group}/datapacks/${group}/data/${namespace}/functions/${path}.mcfunction`;
+      const file = `worlds/${world}/datapacks/${group}/data/${namespace}/functions/${path}.mcfunction`;
       const href = `https://github.com/MCJE-Tech-Shares/Benchmarks/blob/${context.sha}/${file}`;
       const code = fs.readFileSync(file);
       benchmarkTag = `<details><summary><a href="${href}"><code>${benchmark}</code></a></summary><pre lang="mcfunction"><code>${code}</code></pre></details>`;

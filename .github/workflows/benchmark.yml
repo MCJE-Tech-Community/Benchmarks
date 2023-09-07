@@ -87,4 +87,4 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            require('./scripts/summary.js')({ context, timeUnit: '${{ inputs.time_unit }}/op' });
+            require('./scripts/summary.js')({ context, world: '${{ inputs.world }}/op' });
