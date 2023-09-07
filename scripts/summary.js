@@ -1,39 +1,41 @@
+// @ts-check
+
 /**
- * @typedef {"ns" | "us" | "ms" | "s" | "m"} TimeUnit
+ * @typedef {`${"ns" | "us" | "ms" | "s" | "m"}/op`} TimeUnit
+ *
+ * @typedef {{
+ *   mch_version: string,
+ *   forks: number,
+ *   jvm: string,
+ *   jvm_args: string[],
+ *   jdk_version: string,
+ *   vm_name: string,
+ *   vm_version: string,
+ *   mc: string,
+ *   mc_args: string[],
+ *   mc_version: string,
+ *   warmup_iterations: number,
+ *   warmup_time: string,
+ *   measurement_iterations: number,
+ *   measurement_time: string,
+ *   results: {
+ *     group: string,
+ *     benchmark: string,
+ *     mode: string,
+ *     count: number,
+ *     score: number,
+ *     error: number,
+ *     unit: TimeUnit,
+ *     scores: number[],
+ *   }[],
+ * }} Results
  */
 
 module.exports = (/** @type {{ context: { sha: string }, timeUnit: TimeUnit }} */ { context }) => {
   const fs = require('fs');
 
-  /**
-   * @type {{
-   *   mch_version: string,
-   *   forks: number,
-   *   jvm: string,
-   *   jvm_args: string[],
-   *   jdk_version: string,
-   *   vm_name: string,
-   *   vm_version: string,
-   *   mc: string,
-   *   mc_args: string[],
-   *   mc_version: string,
-   *   warmup_iterations: number,
-   *   warmup_time: string,
-   *   measurement_iterations: number,
-   *   measurement_time: string,
-   *   results: {
-   *     group: string,
-   *     benchmark: string,
-   *     mode: string,
-   *     count: number,
-   *     score: number,
-   *     error: number,
-   *     unit: TimeUnit,
-   *     scores: number[],
-   *   }[],
-   * }}
-   */
-  const results = require('../mch-results.json');
+  /** @type {Results} */
+  const results = JSON.parse(fs.readFileSync('../mch-results.json').toString());
 
   const lines = [
     '<h3>Results</h3>',
@@ -97,11 +99,11 @@ module.exports = (/** @type {{ context: { sha: string }, timeUnit: TimeUnit }} *
    */
   function convertToNs(time, unit) {
     switch (unit) {
-      case 'ns': return time;
-      case 'us': return time * 1000;
-      case 'ms': return time * 1000000;
-      case 's': return time * 1000000000;
-      case 'm': return time * 60000000000;
+      case 'ns/op': return time;
+      case 'us/op': return time * 1000;
+      case 'ms/op': return time * 1000000;
+      case 's/op': return time * 1000000000;
+      case 'm/op': return time * 60000000000;
     }
   }
 
@@ -144,5 +146,5 @@ module.exports = (/** @type {{ context: { sha: string }, timeUnit: TimeUnit }} *
     '</table>',
   );
 
-  fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n'));
+  fs.appendFileSync(/** @type {string} */(process.env.GITHUB_STEP_SUMMARY), lines.join('\n'));
 };
