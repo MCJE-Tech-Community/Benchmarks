@@ -53,9 +53,7 @@ module.exports = (/** @type {{ context: { sha: string }, timeUnit: TimeUnit }} *
     '</thead>',
   ];
 
-  const sortedResults = results.results.sort((a, b) => a.benchmark.localeCompare(b.benchmark));
-
-  for (const { group, benchmark, mode, count, score, error, unit } of sortedResults) {
+  for (const { group, benchmark, mode, count, score, error, unit } of results.results) {
     /** @type {string} */
     let benchmarkTag;
     if (benchmark === 'mch:baseline') {
@@ -107,7 +105,7 @@ module.exports = (/** @type {{ context: { sha: string }, timeUnit: TimeUnit }} *
     }
   }
 
-  for (const { benchmark, score, error, unit } of sortedResults) {
+  for (const { benchmark, score, error, unit } of results.results) {
     const scoreNs = convertToNs(score, unit);
     const errorNs = convertToNs(error, unit);
     lines.push(
