@@ -1,6 +1,6 @@
 name: ベンチマーク
 
-run-name: ${{ inputs.function_benchmark }}
+run-name: ${{ inputs.world }}
 
 on:
   workflow_dispatch:
@@ -41,9 +41,9 @@ on:
         description: "Minecraft arguments to use with forks"
         required: false
         default: "nogui"
-      function_benchmark:
+      world:
         type: string
-        description: "Data pack name for function benchmark"
+        description: "World name for benchmarking"
         required: true
 
 jobs:
@@ -67,14 +67,14 @@ jobs:
           echo "eula=true" > eula.txt
 
           cat <<EOF > server.properties
-          level-name=worlds/${{ inputs.function_benchmark }}
+          level-name=worlds/${{ inputs.world }}
           level-type=flat
           white-list=true
           max-players=0
           EOF
 
-          curl -L -o mch.jar https://github.com/mcenv/mch/releases/download/v0.15.0/mch.jar
-          java -jar mch.jar --mc=$MINECRAFT --warmup_iterations=${{ inputs.warmup_iterations }} --measurement_iterations=${{ inputs.measurement_iterations }} --time=${{ inputs.time }} --forks=${{ inputs.forks }} --time_unit=${{ inputs.time_unit }} --mc_args=${{ inputs.mc_args }} --function_benchmarks=${{ inputs.function_benchmark }}
+          curl -L -o mch.jar https://github.com/mcenv/mch/releases/download/v0.16.0/mch.jar
+          java -jar mch.jar --mc=$MINECRAFT --warmup_iterations=${{ inputs.warmup_iterations }} --measurement_iterations=${{ inputs.measurement_iterations }} --time=${{ inputs.time }} --forks=${{ inputs.forks }} --time_unit=${{ inputs.time_unit }} --mc_args=${{ inputs.mc_args }}
       - name: ベンチマーク結果のアップロード
         uses: actions/upload-artifact@v3
         with:
