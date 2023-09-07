@@ -1,4 +1,8 @@
-module.exports = (/** @type {{ context: { sha: string } }} */ { context }) => {
+/**
+ * @typedef {"ns" | "us" | "ms" | "s" | "m"} TimeUnit
+ */
+
+module.exports = (/** @type {{ context: { sha: string }, timeUnit: TimeUnit }} */ { context }) => {
   const fs = require('fs');
 
   /**
@@ -24,7 +28,7 @@ module.exports = (/** @type {{ context: { sha: string } }} */ { context }) => {
    *     count: number,
    *     score: number,
    *     error: number,
-   *     unit: string,
+   *     unit: TimeUnit,
    *     scores: number[],
    *   }[],
    * }}
@@ -85,10 +89,28 @@ module.exports = (/** @type {{ context: { sha: string } }} */ { context }) => {
     'dateFormat X',
     `axisFormat %s`,
   );
-  for (const { benchmark, score, error } of sortedResults) {
+
+  /**
+   * @param {number} time
+   * @param {TimeUnit} unit
+   * @returns {number}
+   */
+  function convertToNs(time, unit) {
+    switch (unit) {
+      case 'ns': return time;
+      case 'us': return time * 1000;
+      case 'ms': return time * 1000000;
+      case 's': return time * 1000000000;
+      case 'm': return time * 60000000000;
+    }
+  }
+
+  for (const { benchmark, score, error, unit } of sortedResults) {
+    const scoreNs = convertToNs(score, unit);
+    const errorNs = convertToNs(error, unit);
     lines.push(
       `section ${benchmark.replace(':', '#58;')}`,
-      `± ${error.toFixed(6)} : 0, ${Math.round(score)}`,
+      `± ${errorNs.toFixed(6)} : 0, ${Math.round(scoreNs)}`,
     );
   }
   lines.push(

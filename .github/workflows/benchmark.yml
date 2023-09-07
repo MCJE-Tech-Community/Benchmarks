@@ -86,4 +86,5 @@ jobs:
       - name: サマリーの作成
         uses: actions/github-script@v6
         with:
-          script: require('./scripts/summary.js')({ context });
+          script: |
+            require('./scripts/summary.js')({ context, timeUnit: '${{ inputs.time_unit }}' });
