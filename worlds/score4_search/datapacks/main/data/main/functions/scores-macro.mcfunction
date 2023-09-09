@@ -1,0 +1,1 @@
+$execute as @e[scores={x1=..$(x),x2=$(x)..,y1=..$(y),y2=$(y)..}] run function main:function
