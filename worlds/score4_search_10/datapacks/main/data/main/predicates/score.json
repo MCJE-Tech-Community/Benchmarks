@@ -1,0 +1,60 @@
+[
+    {
+        "condition": "value_check",
+        "value": {
+            "type": "score",
+            "target": {
+                "type": "fixed",
+                "name": "_"
+            },
+            "score": "x1"
+        },
+        "range": {
+            "min": {
+                "type": "score",
+                "target": {
+                    "type": "context",
+                    "target": "this"
+                },
+                "score": "x1"
+            },
+            "max": {
+                "type": "score",
+                "target": {
+                    "type": "context",
+                    "target": "this"
+                },
+                "score": "x2"
+            }
+        }
+    },
+    {
+        "condition": "value_check",
+        "value": {
+            "type": "score",
+            "target": {
+                "type": "fixed",
+                "name": "_"
+            },
+            "score": "y1"
+        },
+        "range": {
+            "min": {
+                "type": "score",
+                "target": {
+                    "type": "context",
+                    "target": "this"
+                },
+                "score": "y1"
+            },
+            "max": {
+                "type": "score",
+                "target": {
+                    "type": "context",
+                    "target": "this"
+                },
+                "score": "y2"
+            }
+        }
+    }
+]

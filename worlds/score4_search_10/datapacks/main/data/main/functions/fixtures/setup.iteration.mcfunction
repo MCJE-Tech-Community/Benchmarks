@@ -7,6 +7,17 @@ summon item_display ~ ~ ~ {UUID:[I;0,0,0,5]}
 summon item_display ~ ~ ~ {UUID:[I;0,0,0,6]}
 summon item_display ~ ~ ~ {UUID:[I;0,0,0,7]}
 summon item_display ~ ~ ~ {UUID:[I;0,0,0,8]}
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
+summon item_display ~ ~ ~
 
 scoreboard players set @e x1 -1
 scoreboard players set @e x2 -1
