@@ -1,0 +1,1 @@
+$data modify storage _: data set from storage _: _data[$(id)]
