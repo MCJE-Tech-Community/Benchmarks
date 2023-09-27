@@ -1,0 +1,1 @@
+function main:macro-macro with storage _: b

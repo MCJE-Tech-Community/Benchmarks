@@ -1,0 +1,1 @@
+summon text_display ~ ~ ~ {UUID:[I;0,0,0,0],Tags:["A"]}

@@ -1,0 +1,1 @@
+execute if entity @s[tag=A] run function main:pass
