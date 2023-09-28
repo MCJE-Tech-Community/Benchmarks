@@ -1,0 +1,9 @@
+data modify storage _: 1 set value {a:"1",b:"1"}
+data modify storage _: 2 set value {a:"2",b:"2"}
+data modify storage _: 3 set value {a:"3",b:"3"}
+data modify storage _: 4 set value {a:"4",b:"4"}
+data modify storage _: 5 set value {a:"5",b:"5"}
+data modify storage _: 6 set value {a:"6",b:"6"}
+data modify storage _: 7 set value {a:"7",b:"7"}
+data modify storage _: 8 set value {a:"8",b:"8"}
+data modify storage _: 9 set value {a:"9",b:"9"}
