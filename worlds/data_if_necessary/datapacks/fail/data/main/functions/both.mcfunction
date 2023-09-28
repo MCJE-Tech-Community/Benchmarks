@@ -1,4 +1,4 @@
-#> main:fail
+#> main:both
 # @benchmark
 
 function main:macro-ab with storage _: 1
