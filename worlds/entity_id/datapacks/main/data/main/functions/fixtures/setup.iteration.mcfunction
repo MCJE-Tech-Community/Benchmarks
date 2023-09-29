@@ -1,0 +1,9 @@
+summon egg ~ ~ ~ {UUID:[I;0,0,0,0]}
+summon item ~ ~ ~ {UUID:[I;0,0,0,1]}
+summon arrow ~ ~ ~ {UUID:[I;0,0,0,2]}
+summon marker ~ ~ ~ {UUID:[I;0,0,0,3]}
+summon snowball ~ ~ ~ {UUID:[I;0,0,0,4]}
+summon interaction ~ ~ ~ {UUID:[I;0,0,0,5]}
+summon item_display ~ ~ ~ {UUID:[I;0,0,0,6]}
+summon block_display ~ ~ ~ {UUID:[I;0,0,0,7]}
+summon area_effect_cloud ~ ~ ~ {UUID:[I;0,0,0,8]}
