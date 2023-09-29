@@ -1,0 +1,2 @@
+data modify storage _: in set value {0:{func:"main:func/0",data:"0"},1:{func:"main:func/1",data:"1"},2:{func:"main:func/2",data:"2"},3:{func:"main:func/3",data:"3"},4:{func:"main:func/4",data:"4"},5:{func:"main:func/5",data:"5"},6:{func:"main:func/6",data:"6"},7:{func:"main:func/7",data:"7"},8:{func:"main:func/8",data:"8"}}
+data modify storage _: data set value [{str:"0",int:0},{str:"1",int:1},{str:"2",int:2},{str:"3",int:3},{str:"4",int:4},{str:"5",int:5},{str:"6",int:6},{str:"7",int:7},{str:"8",int:8}]

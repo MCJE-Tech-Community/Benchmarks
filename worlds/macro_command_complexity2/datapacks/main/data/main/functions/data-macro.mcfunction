@@ -1,0 +1,1 @@
+$data modify storage _: _ set from storage _: data[$(data)].str

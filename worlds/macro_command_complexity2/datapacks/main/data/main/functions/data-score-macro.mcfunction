@@ -1,0 +1,1 @@
+$execute store result score _ _ run data get storage _: data[$(data)].int
