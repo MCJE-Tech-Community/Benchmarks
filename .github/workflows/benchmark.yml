@@ -84,7 +84,7 @@ jobs:
             mch-results.json
             mch-results.md
       - name: サマリーの作成
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             require('./scripts/summary.js')({ context, world: '${{ inputs.world }}' });
